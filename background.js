@@ -76,6 +76,19 @@ chrome.runtime.onMessage.addListener((message,sender,reply) => {
     (async () => {
         if (message.type === 'CX_AI_OPEN' && pageSender(sender)) { await chrome.runtime.openOptionsPage(); return {}; }
         if (optionsSender(sender)) {
+            if (message.type === 'CX_AI_TEST') {
+                const {cx_deepseek_key:key} = await chrome.storage.session.get('cx_deepseek_key');
+                if (!key) throw new Error('请先保存 API Key');
+                const config = await chrome.storage.local.get('cx_ai_model');
+                const response = await fetch('https://api.deepseek.com/chat/completions', {
+                    method:'POST', signal:AbortSignal.timeout(30000),
+                    headers:{'Content-Type':'application/json',Authorization:`Bearer ${key}`},
+                    body:JSON.stringify({model:config.cx_ai_model || DEFAULT_MODEL,thinking:{type:'disabled'},max_tokens:32,messages:[{role:'user',content:'Reply with OK only.'}]})
+                });
+                if (!response.ok) throw new Error(`DeepSeek 连接失败 (HTTP ${response.status})`);
+                const data = await response.json();
+                return {model:data.model,reply:data.choices?.[0]?.message?.content || '(空响应)'};
+            }
             if (message.type === 'CX_AI_CONFIG') {
                 const s = await chrome.storage.local.get('cx_ai_model');
                 const k = await chrome.storage.session.get('cx_deepseek_key');

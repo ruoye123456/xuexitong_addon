@@ -21,8 +21,8 @@ const AISolver = {
         const imageOnly = [...root.querySelectorAll('img')].some(img => this.visible(img) && !img.alt?.trim());
         const fields = [...root.querySelectorAll('textarea, input[type="text"], [contenteditable="true"]')]
             .filter(el => this.visible(el) && !el.disabled && !el.readOnly);
-        let type = /多选/.test(title) || root.querySelector('input[type="checkbox"], .num_option_dx') ? 'multiple' :
-            /判断/.test(title) ? 'boolean' : options.length ? 'single' : /填空/.test(title) ? 'blank' : 'text';
+        let type = /多选|Multiple\s*Choice/i.test(title) || root.querySelector('input[type="checkbox"], .num_option_dx') ? 'multiple' :
+            /判断|True\s*or\s*False/i.test(title) ? 'boolean' : options.length ? 'single' : /填空|Fill\s*in/i.test(title) ? 'blank' : 'text';
         if (!options.length && !fields.length) return null;
         return {question:{title,type,options,blanks:options.length ? 0 : fields.length},nodes,fields,imageOnly};
     },

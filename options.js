@@ -19,3 +19,11 @@ document.querySelector('#delete').onclick = async () => {
     try { await send({type:'CX_AI_DELETE'}); await refresh(); } catch(e) { status.textContent = e.message; }
 };
 refresh().catch(e => status.textContent = e.message);
+
+document.querySelector('#test').onclick = async () => {
+    status.textContent = '正在测试官方接口…';
+    try {
+        const r = await send({type:'CX_AI_TEST'});
+        status.textContent = `连接成功：${r.model}，返回 ${r.reply}`;
+    } catch(e) { status.textContent = e.message; }
+};
