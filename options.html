@@ -1,0 +1,8 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>DeepSeek 设置</title>
+<style>body{font:15px system-ui;max-width:620px;margin:60px auto;padding:24px;color:#24324a}label{display:block;margin:22px 0}input{display:block;width:100%;box-sizing:border-box;padding:12px;margin-top:8px;border:1px solid #bac6d8;border-radius:8px}button{padding:10px 18px;margin:10px 8px 0 0;cursor:pointer}p{line-height:1.8}#status{white-space:pre-wrap}</style>
+<h1>DeepSeek 自动答题设置</h1><p>官方接口：https://api.deepseek.com。开启 AI 后，当前题目和选项会发送至 DeepSeek。只填写答案，由你检查后提交。</p>
+<label>API Key<input id="key" type="password" autocomplete="off" placeholder="sk-…（留空保留当前密钥）"></label>
+<p>密钥仅保存在扩展后台的会话存储中，不写入源码或题库。退出浏览器或重新加载扩展后需重新填写。</p>
+<label>模型 ID<input id="model" value="deepseek-flash"></label>
+<button id="save">保存设置</button><button id="delete">删除密钥</button><p role="status" id="status"></p>
+<script src="options.js"></script></html>

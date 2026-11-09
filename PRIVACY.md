@@ -1,2 +1,9 @@
-Privacy Policy
-This extension ("学习通全能助手") runs entirely locally on your device. It does not collect, store, transmit, or share any personal information, browsing history, or user data to any external servers or third parties. All data generated (such as scraped questions) remains strictly on your local machine.
+# 隐私说明
+
+视频、文档、Excel 题库和导出功能在本地运行。
+
+选择 DeepSeek 并开启自动答题后，扩展会将当前页面识别到的题目文字、选项及填空数量发送到 `https://api.deepseek.com/chat/completions`，使用用户自己的 API Key 调用官方接口。不会主动发送页面 URL、姓名、Cookie、课程账号或整页 HTML；如果题目本身含有个人信息，该信息也会随题目发送。DeepSeek 对请求数据的处理受其服务条款和隐私政策约束。
+
+API Key 仅保存在 `chrome.storage.session` 的默认可信扩展上下文中，网页和内容脚本不能直接读取；退出浏览器、停用或重新加载扩展后需要重新填写。设置页可以删除密钥。模型配置和原有题库保存在本机 `chrome.storage.local`。
+
+成功的 AI 结果在后台内存中短暂缓存，最多 100 条。页面下方显示答案与解析，不自动提交。停止后尚未发出的排队请求会被跳过；已发出的请求可能产生费用，返回结果不会再填入已停止的页面。

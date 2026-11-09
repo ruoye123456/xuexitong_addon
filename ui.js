@@ -33,6 +33,7 @@ const UI = {
         };
 
         this.bindEvents(div);
+        AIUI.inject(div);
         this.makeDraggable(div);
         this.restoreState();
     },
@@ -40,7 +41,7 @@ const UI = {
     renderTemplate: function() {
         return `
             <div id="cx-header" style="${this.styles.header}">
-                <span style="flex:1; padding-left:14px;">🤖 学习通助手 v5.0</span>
+                <span style="flex:1; padding-left:14px;">🤖 学习通助手 v5.1</span>
                 <span id="btn-collapse" style="${this.styles.btnCollapse}" title="折叠/展开">➖</span>
             </div>
             
@@ -196,6 +197,7 @@ const UI = {
     updateState: function() {
         State.get(m => {
             const pAnswer = document.querySelector("#panel-answer"), pScrape = document.querySelector("#panel-scrape"), pLearn = document.querySelector("#panel-learn");
+            AIUI.update(m);
             const btnRun = document.querySelector("#btn-run"), btnScrape = document.querySelector("#btn-scrape-toggle"), btnLearn = document.querySelector("#btn-learn-toggle");
             const status = document.querySelector("#cx-status");
             

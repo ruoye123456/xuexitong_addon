@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "学习通全能助手 (自动翻页版)",
-  "version": "5.0",
+  "name": "学习通全能助手 (DeepSeek 版)",
+  "version": "5.1.0",
   "description": "集成了智能排队刷课、视频倍速播放、自动翻阅图文PPT、无感跳过已完成任务与测验、自动答题及题库多格式导出等全能功能。",
   "icons": {
     "16": "icons/stack-of-books.png",
@@ -22,26 +22,24 @@
         "xlsx.full.min.js",
         "utils.js",
         "pagination.js",
+        "ai-ui.js",
         "ui.js",
         "video.js",
         "doc.js",
         "scraper.js",
         "solver.js",
+        "ai-solver.js",
         "main.js"
       ],
       "run_at": "document_end",
       "all_frames": true
     }
   ],
-  "browser_specific_settings": {
-    "gecko": {
-      "id": "xuexitong-scraper@tomgranger.com",
-      "strict_min_version": "109.0",
-      "data_collection_permissions": {
-        "required": [
-          "none"
-        ]
-      }
-    }
-  }
+  "background": {
+    "service_worker": "background.js"
+  },
+  "options_page": "options.html",
+  "host_permissions": [
+    "https://api.deepseek.com/*"
+  ]
 }

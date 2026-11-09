@@ -260,7 +260,8 @@ window.addEventListener('message', (event) => {
             if (!memory[KEYS.IS_SCRAPING] && !memory[KEYS.IS_LEARN_MODE] && memory[KEYS.IS_ANSWERING]) {
                 // 恢复呼叫 Solver 的逻辑
                 if (typeof Solver !== 'undefined') {
-                    Solver.run(memory);
+                    if (memory.cx_answer_source === 'deepseek') AISolver.run();
+                    else Solver.run(memory);
                 }
             }
 
