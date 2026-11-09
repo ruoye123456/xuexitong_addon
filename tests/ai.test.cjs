@@ -58,3 +58,8 @@ test('background rejects invalid model labels, truncated JSON and auth errors',a
  const b=background(async()=>response);assert.equal((await b.send({type:'CX_AI_SOLVE',question})).ok,false);
  }
 });
+
+test('English question type labels used by live Chaoxing pages',()=>{
+ const {s,root}=page('<div class="Zy_TItle"><div class="clearfix fontLabel">【Multiple Choice】课程原则？</div></div>'+option('A','甲')+option('B','乙'));
+ assert.equal(s.read(root).question.type,'multiple');
+});
